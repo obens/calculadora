@@ -20,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
     EditText ed2;
     EditText ed3;
     EditText ed4;
+    EditText edResultado;
     Button bt;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ed1= (EditText)findViewById(R.id.editText8Np1);
+        ed2= (EditText)findViewById(R.id.editText6NP2);
+        ed3= (EditText)findViewById(R.id.editText9Peso1);
+        ed4= (EditText)findViewById(R.id.editText4Peso2);
+        edResultado= (EditText)findViewById(R.id.editText10MediaTot);
+        bt=(Button)findViewById(R.id.buttonCalcular);
+
+        bt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Double Np1;
+                Double Np2;
+                Double Peso1;
+                Double Peso2;
+                Double Resutado;
+                Np1 = Double.parseDouble(ed1.getText().toString());
+                Np2 = Double.parseDouble(ed2.getText().toString());
+                Peso1 = Double.parseDouble(ed3.getText().toString());
+                Peso2 = Double.parseDouble(ed4.getText().toString());
+                Resutado = (Np1 * Peso1) + (Np2 * Peso2);
+                edResultado.setText(Resutado.toString());
+            }
+        });
+
+
 
 
 
