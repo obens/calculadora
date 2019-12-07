@@ -1,5 +1,8 @@
 package com.example.macalculatrice;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,12 +49,30 @@ public class MainActivity extends AppCompatActivity {
                 Double Peso1;
                 Double Peso2;
                 Double Resutado;
-                Np1 = Double.parseDouble(ed1.getText().toString());
-                Np2 = Double.parseDouble(ed2.getText().toString());
-                Peso1 = Double.parseDouble(ed3.getText().toString());
-                Peso2 = Double.parseDouble(ed4.getText().toString());
-                Resutado = (Np1 * Peso1) + (Np2 * Peso2);
-                edResultado.setText(Resutado.toString());
+
+
+                if(ed1.length() == 0 || ed2.length() == 0 || ed3.length() == 0 || ed4.length() == 0){
+                    AlertDialog.Builder a = new AlertDialog.Builder(MainActivity.this);
+                    a.setTitle("Alerta");
+                    a.setMessage("Você não informou um valor!");
+                    a.show();
+                }else {
+                    Np1 = Double.parseDouble(ed1.getText().toString());
+                    Np2 = Double.parseDouble(ed2.getText().toString());
+                    Peso1 = Double.parseDouble(ed3.getText().toString());
+                    Peso2 = Double.parseDouble(ed4.getText().toString());
+                    if(Np1 <= 10 && Np2 <= 10 && Peso1 < 1 && Peso1 > 0 && Peso2 < 1 && Peso2 > 0 && (Peso1+Peso2)==1){
+                        Resutado = (Np1 * Peso1) + (Np2 * Peso2);
+                        edResultado.setText(Resutado.toString());
+                    }
+                    else {
+                        AlertDialog.Builder a = new AlertDialog.Builder(MainActivity.this);
+                        a.setTitle("Alerta");
+                        a.setMessage("Você deve informar a sua nota entre 0 a 10 e peso tem que estar entre 0.1 e 0.9 e totalizar 1.0 ");
+                        a.show();
+
+                    }
+                }
             }
         });
 
@@ -61,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
         
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.ButtonInfo);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(MainActivity.this, Info_Activity.class);
+                startActivity(i);
             }
         });
     }
